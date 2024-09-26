@@ -1,5 +1,7 @@
 import './style.css'
 import logoBatoi from '/logoBatoi.png'
+import { getBookById, getBookIndexById } from './src/functions'
+import data from './src/services/datos'
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -13,4 +15,6 @@ document.querySelector('#app').innerHTML = `
   </div>
 `
 
-setupCounter(document.querySelector('#counter'))
+
+console.log(getBookById(data.books, 6));
+console.log(getBookIndexById(data.books, 85));
