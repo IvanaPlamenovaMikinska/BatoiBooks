@@ -1,6 +1,6 @@
 import './style.css'
 import logoBatoi from '/logoBatoi.png'
-import { getBookById, getBookIndexById } from './src/functions'
+import { booksFromUser, booksFromModule, booksWithStatus, incrementPriceOfbooks } from './src/functions'
 import data from './src/services/datos'
 
 document.querySelector('#app').innerHTML = `
@@ -16,5 +16,7 @@ document.querySelector('#app').innerHTML = `
 `
 
 
-console.log(getBookById(data.books, 6));
-console.log(getBookIndexById(data.books, 85));
+console.log(booksFromUser(data.books, 4));
+console.log(booksFromModule(data.books, '5021'));
+console.log(booksWithStatus(data.books, "good"));
+console.log(incrementPriceOfbooks(data.books, 0.1));
