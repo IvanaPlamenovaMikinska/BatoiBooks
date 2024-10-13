@@ -1,29 +1,26 @@
 import User from './user.class'
+import { getDBUsers, addDBUser, removeDBUser, changeDBUser, changeDBUserPassword} from '../services/users.api';
 export default class Users {
     constructor() {
         this.data = []
     }
 
-    populate(users) {
+    async populate() {
+        const users = await getDBUsers();
         users.forEach(user => {
             this.data.push(new User(user.id, user.nick, user.email, user.password))
         });
     }
 
-    addUser(user) {
-        let user2 = new User(user.id, user.nick, user.email, user.password)
-        let max = 0
-        this.data.forEach(user => {
-            if(user.id > max) {
-                max = user.id
-            }
-        });
-        user2.id = max + 1
+    async addUser(user) {
+        const usuario = await addDBUser(user);
+        let user2 = new User(usuario.id, usuario.nick, usuario.email, usuario.password)
         this.data.push(user2)
         return user2
     }
 
-    removeUser(id) {
+    async removeUser(id) {
+        await removeDBUser(id)
         let cont = 0
         let encontrado = false
         this.data.forEach(user => {
@@ -37,11 +34,23 @@ export default class Users {
         throw "El user con este id no existe"
     }
     
-    changeUser(userParaActualizar) {
+    async changeUser(userParaActualizar) {
+        await changeDBUser(userParaActualizar);
         const userFound = this.data.find(user => user.id === userParaActualizar.id)
         if(userFound) {
             Object.assign(userFound, userParaActualizar)
             return userFound
+        } else {
+            throw "El user no se ha encontrado"
+        }
+    }
+
+    async changeUserPassword(id, password) {
+        await changeDBUserPassword(id, password)
+        const user = this.data.find(user => user.id === id)
+        if(user) {
+            user.password = password
+            return user
         } else {
             throw "El user no se ha encontrado"
         }

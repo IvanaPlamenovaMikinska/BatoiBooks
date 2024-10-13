@@ -1,45 +1,45 @@
 import Book from './book.class'
+import { getDBBooks, addDBBook, removeDBBook, changeDBBook } from '../services/books.api'
+const NOTES = 'Apunts'
+
 export default class Books {
     constructor() {
         this.data = []
     }
 
-    populate(libros) {
+    async populate() {
+        const libros = await getDBBooks();
         libros.forEach(libro => {
             this.data.push(new Book(libro))
         });
     }
 
-    addBook(libro) {
-        let book = new Book(libro)
-        let max = 0
-        this.data.forEach(libro => {
-            if(libro.id > max) {
-                max = libro.id
-            }
-        });
-        book.id = max + 1
+    async addBook(libro) {
+        const nuevoLibro = await addDBBook(libro);
+        let book = new Book(nuevoLibro)
         this.data.push(book)
         return book
     }
 
-    removeBook(id) {
+    async removeBook(id) {
+        const libro = await removeDBBook(id)
         let cont = 0
         let encontrado = false
         this.data.forEach(libro => {
-            if(libro.id === id) {
+            if (libro.id === id) {
                 this.data.splice(cont, 1)
                 encontrado = true
             }
             cont++
         });
-    if(!encontrado) 
-        throw "El libro con este id no existe"
+        if (!libro)
+            throw "El libro con este id no existe"
     }
-    
-    changeBook(libro) {
+
+    async changeBook(libro) {
+        await changeDBBook(libro)
         const book = this.data.find(book => book.id === libro.id)
-        if(book) {
+        if (book) {
             Object.assign(book, libro)
             return book
         } else {
@@ -61,7 +61,7 @@ export default class Books {
             return book;
         }
         throw "No se ha encontrado ningun libro por el id";
-    
+
     }
 
     getBookIndexById(bookId) {
@@ -73,9 +73,9 @@ export default class Books {
     }
 
     bookExists(userId, moduleCode) {
-        return this.data.some(libro => 
-            userId === libro.userId && 
-        moduleCode === libro.moduleCode);
+        return this.data.some(libro =>
+            userId === libro.userId &&
+            moduleCode === libro.moduleCode);
     }
 
     booksFromUser(userId) {
@@ -89,27 +89,27 @@ export default class Books {
     booksCheeperThan(price) {
         return this.data.filter(libro => libro.price <= price);
     }
-    
+
     booksWithStatus(status) {
         return this.data.filter(libro => libro.status === status);
     }
-    
+
     averagePriceOfBooks() {
         if (this.data.length === 0) return '0.00 €';
-    
+
         const total = this.data.reduce((acc, book) => acc + book.price, 0);
         const average = total / this.data.length;
         return `${average.toFixed(2)} €`;
     }
-    
+
     booksOfTypeNotes() {
-        return this.data.filter(libro => libro.publisher == 'Apunts');
+        return this.data.filter(libro => libro.publisher == NOTES);
     }
-    
+
     booksNotSold() {
         return this.data.filter(libro => libro.soldDate === "");
     }
-    
+
     incrementPriceOfbooks(percentage) {
         return this.data.map(libro => {
             libro.price = libro.price + (libro.price * percentage);
