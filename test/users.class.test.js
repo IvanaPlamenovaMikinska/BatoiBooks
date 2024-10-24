@@ -133,8 +133,7 @@ describe('Clase Users', () => {
 
   test('changeUserPassword lanza una excepción si un usuario no existe', async () => {
     const user = new User(100, 'nick', 'email', 'pass')
-    expect(users.changeUserPassword).toBeDefined()
-    await (expect(() => users.changeUserPassword(100, 'newPassword'))).rejects.toThrowError()
+    await (expect(users.changeUserPassword(100, 'newPassword'))).rejects.toThrowError()
   })
 
   test('toString pinta correctamente los usuarios', async () => {
