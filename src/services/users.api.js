@@ -1,4 +1,5 @@
 const SERVER = 'http://localhost:3000/users/'
+//const SERVER = 'http://ivanaplamenova.projecte1.es:5050/users/'
 export async function getDBUsers() {
     const response = await fetch(SERVER);
     if(!response.ok) {

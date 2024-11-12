@@ -1,6 +1,5 @@
 import './style.css'
 import logoBatoi from '/logoBatoi.png'
-import data from './src/services/datos'
 import Controller from './src/controller/controller.class'
 
 document.querySelector('#app').innerHTML = `
@@ -20,7 +19,7 @@ document.querySelector('#app').innerHTML = `
 <h2 id="form-title">Añadir Libro</h2>
 <b><div id="messages"></div><br></b>
 
-<form id="bookForm">
+<form id="bookForm" novalidate>
 <div>
 <label> Id:</label>
 <input type="text" id="id">
@@ -28,34 +27,43 @@ document.querySelector('#app').innerHTML = `
 
   <div>
     <label for="id-module">Módulo:</label>
-    <select id="id-module">
-      <option>- Selecciona un módulo -</option>
+    <select id="id-module" required>
+      <option value="" disabled selected>- Selecciona un módulo -</option>
     </select>
+    <span class="error">  </span>
   </div>
 
   <div>
     <label for="publisher">Editorial:</label>
     <input type="text" id="publisher" required>
+        <span class="error">  </span>
+
   </div>
 
   <div>
     <label for="price">Precio:</label>
-    <input type="number" id="price">
+    <input type="number" id="price" required min="0" step="0.01" placeholder="0.00">
+        <span class="error">  </span>
+
   </div>
 
   <div>
     <label for="pages">Páginas:</label>
-    <input type="number" id="pages">
+    <input type="number" id="pages" required min="0" step="1" placeholder="0">
+        <span class="error">  </span>
+
   </div>
 
   <div>
     <label>Estado:</label>
-    <input type="radio" id="nuevo" value="nuevo" name="status">
+    <input type="radio" id="nuevo" value="nuevo" name="status" required>
     <label for="nuevo">Nuevo</label>
-    <input type="radio" id="bueno" value="bueno" name="status">
+    <input type="radio" id="bueno" value="bueno" name="status" required>
     <label for="viejo">Bueno</label>
-    <input type="radio" id="malo" value="malo" name="status">
+    <input type="radio" id="malo" value="malo" name="status" required>
     <label for="viejo">Malo</label>
+        <span class="error">  </span>
+
   </div>
 
   <div>

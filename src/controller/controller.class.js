@@ -49,8 +49,13 @@ export default class Controller {
 
     async handleRemoveBook(bookId) {
         try {
-            await this.model.books.removeBook(bookId)
-            this.view.removeBook(bookId)
+            const confirmed = confirm("¿Estás seguro de que deseas eliminar este libro?");
+            if (confirmed) {
+                await this.model.books.removeBook(bookId)
+                this.view.removeBook(bookId)
+            } else {
+                this.view.renderMessage("info", `Eliminación cancelada para el libro con id: ${bookId}`);
+            }
         } catch (error) {
             this.view.renderMessage("error", `Error, No se ha podido eliminar el libro: ${error}`)
         }

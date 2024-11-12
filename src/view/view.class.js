@@ -100,7 +100,6 @@ export default class View {
         } catch (error) {
             this.renderMessage("error", `Error, El libro no ha podido eliminarse: ${error}`)
         }
-
     }
 
     renderMessage(tipo, message) {
@@ -127,18 +126,27 @@ export default class View {
         this.bookForm.addEventListener('submit', (event) => {
             event.preventDefault()
 
-            const payload = {
-                id: document.getElementById("id").value,
-                moduleCode: document.getElementById("id-module").value,
-                publisher: document.getElementById("publisher").value,
-                price: document.getElementById("price").value,
-                pages: document.getElementById("pages").value,
-                status: document.querySelector('input[name="status"]:checked')?.value || "No seleccionado",
-                comments: document.getElementById("comments").value
+            if (this.bookForm.checkValidity()) {
+                const id = document.getElementById("id").value
+                const payload = {
+                    ...(id && { id }),
+                    moduleCode: document.getElementById("id-module").value,
+                    publisher: document.getElementById("publisher").value,
+                    price: document.getElementById("price").value,
+                    pages: document.getElementById("pages").value,
+                    status: document.querySelector('input[name="status"]:checked')?.value || "No seleccionado",
+                    comments: document.getElementById("comments").value
+                }
+                console.log(id)
+                this.validacionesForm();
+                // a continuación recoge los datos del formulario y los guarda en un objeto // por último llama a la función recibida pasándole dicho objeto
+                callback(payload)
+                this.bookForm.reset();
+            } else {
+                this.validacionesForm();
             }
-            // a continuación recoge los datos del formulario y los guarda en un objeto // por último llama a la función recibida pasándole dicho objeto
-            callback(payload)
         })
+
     }
 
     loadBookToForm(book) {
@@ -161,5 +169,50 @@ export default class View {
         const addButton = document.querySelector("button[type='submit']");
         addButton.innerText = "Añadir";
         document.getElementById("bookForm").reset();
+    }
+
+    validacionesForm() {
+        const fieldModuleCode = document.getElementById("id-module")
+        const fieldPublisher = document.getElementById("publisher")
+        const fieldPrice = document.getElementById("price")
+        const fieldPages = document.getElementById("pages")
+        const fieldStatus = document.querySelector('input[name="status"]:checked')
+
+        let modulesError = fieldModuleCode.nextElementSibling
+        let publisherError = fieldPublisher.nextElementSibling
+        let priceError = fieldPrice.nextElementSibling
+        let pagesError = fieldPages.nextElementSibling
+        let statusError = document.querySelector('input[name="status"]').closest('div').querySelector('.error')
+
+
+        if (!fieldModuleCode.checkValidity()) {
+            modulesError.innerHTML = fieldModuleCode.validationMessage
+        } else {
+            modulesError.innerHTML = ""
+        }
+
+        if (!fieldPublisher.checkValidity()) {
+            publisherError.innerText = fieldPublisher.validationMessage
+        } else {
+            publisherError.innerText = ""
+        }
+
+        if (!fieldPrice.checkValidity()) {
+            priceError.innerText = fieldPrice.validationMessage
+        } else {
+            priceError.innerText = ""
+        }
+
+        if (!fieldPages.checkValidity()) {
+            pagesError.innerText = fieldPages.validationMessage
+        } else {
+            pagesError.innerHTML = ""
+        }
+
+        if (!fieldStatus) {
+            statusError.innerHTML = "Selecciona el estado."
+        } else {
+            statusError.innerHTML = ""
+        }
     }
 }

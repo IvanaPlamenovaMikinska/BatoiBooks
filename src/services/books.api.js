@@ -1,5 +1,5 @@
 const SERVER = 'http://localhost:3000/books/'
-
+//const SERVER = 'http://ivanaplamenova.projecte1.es:5050/books/'
 export async function getDBBooks() {
     const response = await fetch(SERVER);
     if(!response.ok) {

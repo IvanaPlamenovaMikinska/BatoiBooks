@@ -2139,76 +2139,58 @@
   ],
   "books": [
     {
-      "id": "1",
-      "userId": 2,
-      "moduleCode": "5025",
-      "publisher": "Apunts",
-      "price": 12,
-      "pages": 25,
-      "status": "good",
-      "photo": "",
-      "comments": "",
-      "soldDate": "2023-02-01"
-    },
-    {
-      "id": "9",
-      "userId": 4,
-      "moduleCode": "5025",
-      "publisher": "Apunts",
-      "price": 35,
-      "pages": 73,
-      "status": "good",
-      "photo": "",
-      "comments": "",
-      "soldDate": ""
-    },
-    {
-      "id": "10",
-      "userId": 5,
-      "moduleCode": "5021",
-      "publisher": "Apunts",
-      "price": 5,
-      "pages": 57,
-      "status": "good",
-      "photo": "",
-      "comments": "",
-      "soldDate": ""
-    },
-    {
-      "id": "f26c",
-      "moduleCode": "Seguridad e higiene en la manipulación de alimentos",
-      "publisher": "juan",
-      "price": "1",
-      "pages": "12",
+      "id": "436d",
+      "moduleCode": "Procesos básicos de pastelería y repostería",
+      "publisher": "fsgsfgdweqewqd",
+      "price": "124",
+      "pages": "12432",
       "status": "bueno",
-      "comments": "fol"
+      "comments": "124"
     },
     {
-      "id": "9c50",
-      "moduleCode": "Disposición y venta de productos",
-      "publisher": "pepe",
-      "price": "9",
-      "pages": "230",
+      "id": "edcc",
+      "moduleCode": "Empresa e iniciativa emprendedora",
+      "publisher": "hola",
+      "price": "123",
+      "pages": "123233",
+      "status": "bueno",
+      "comments": "sdaf"
+    },
+    {
+      "id": "3924",
+      "moduleCode": "Oficina de farmacia",
+      "publisher": "ggre",
+      "price": "324",
+      "pages": "546",
+      "status": "nuevo",
+      "comments": "23423"
+    },
+    {
+      "id": "9239",
+      "moduleCode": "Técnicas culinarias",
+      "publisher": "awerf",
+      "price": "2334",
+      "pages": "234",
+      "status": "bueno",
+      "comments": "sdgre"
+    },
+    {
+      "id": "ae62",
+      "moduleCode": "Habilidades sociales",
+      "publisher": "nulas",
+      "price": "0",
+      "pages": "0",
       "status": "malo",
-      "comments": "hola"
+      "comments": "o"
     },
     {
-      "id": "06b8",
-      "moduleCode": "Productos culinarios",
-      "publisher": "aarons",
-      "price": "223",
-      "pages": "12344",
-      "status": "No seleccionado",
-      "comments": "ffff"
-    },
-    {
-      "id": "8914",
-      "moduleCode": "Formación y orientación laboral",
-      "publisher": "dhfgfg",
-      "price": "554555555555",
-      "pages": "1333",
+      "id": "ef8e",
+      "moduleCode": "Seguridad e higiene en la manipulación de alimentos",
+      "publisher": "dddd",
+      "price": "2334",
+      "pages": "233",
       "status": "bueno",
-      "comments": "rrr"
+      "comments": ""
     }
   ]
 }
